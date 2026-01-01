@@ -1,0 +1,74 @@
+<!--<div class="container mt-4">
+  <div class="d-flex">
+
+     Sidebar
+    <div class="nav flex-column nav-underline me-4" style="min-width: 200px;">
+
+      <a
+      routerLink="/profile/me"
+         routerLinkActive="active"
+         class="nav-link">
+         Profile
+      </a>
+
+      <a
+      routerLink="/profile/updateaccount"
+         routerLinkActive="active"
+         class="nav-link">
+         Update Account
+      </a>
+
+      <a
+       routerLink="change-password"
+         routerLinkActive="active"
+         class="nav-link">
+         Change Password
+      </a>
+
+    </div>
+
+     Main Content
+    <div class="flex-fill">
+      <router-outlet></router-outlet>
+    </div>
+
+  </div>
+</div>
+-->
+<div class="container-fluid mt-4">
+
+  <div class="row">
+
+    <!-- Profile Sidebar -->
+    <div class="col-3 col-md-3 col-lg-3 mb-3 mb-md-0">
+      <nav class="nav flex-column nav-underline">
+
+        <a [routerLink]="isAdmin?'/admin/profile/me':'/profile/me'"
+           routerLinkActive="active"
+           class="nav-link">
+          Profile
+        </a>
+
+        <a [routerLink]="isAdmin?'/admin/profile/updateaccount':'/profile/updateaccount'"
+           routerLinkActive="active"
+           class="nav-link">
+          Update Account
+        </a>
+
+        <a [routerLink]="isAdmin?'/admin/profile/change-password':'/profile/change-password'"
+           routerLinkActive="active"
+           class="nav-link">
+          Change Password
+        </a>
+
+      </nav>
+    </div>
+
+    <!-- Profile Content -->
+    <div class="col-12 col-md-8 col-lg-9">
+      <router-outlet></router-outlet>
+    </div>
+
+  </div>
+
+</div>

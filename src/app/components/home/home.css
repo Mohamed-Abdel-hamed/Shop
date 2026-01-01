@@ -1,0 +1,15 @@
+.container{
+  margin-top: 100px;
+}
+.p-hero {
+width:100%;
+}
+
+.logo-svg {
+  width: 120px;
+  height: auto;
+  display: block;
+}
+.bg-gray{
+  background-color: rgb(232, 214, 214);
+}

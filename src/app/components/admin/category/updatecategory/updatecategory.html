@@ -1,0 +1,50 @@
+
+<div class="d-flex justify-content-center align-items-center flex-column">
+  @if(errorMessage)
+  {
+    <div class="alert alert-danger">
+      {{errorMessage}}
+    </div>
+  }
+    <form
+  [formGroup]="categoryForm"
+  (ngSubmit)="submit(categoryForm)"
+  class="bg-light p-4 rounded-4 shadow form w-100">
+
+  <div>
+    <label for="name" class="form-label">Name</label>
+    <input id="name" type="text" class="form-control"
+           formControlName="name"
+           >
+           @if(categoryForm.get('name')?.invalid&&categoryForm.get('name')?.touched)
+           {
+            <div class="d-flex flex-column">
+              @if(categoryForm.get('name')?.errors?.['required'])
+              {
+                  <span class="text-danger">Category name is required.</span>
+              }
+              @if(categoryForm.get('name')?.errors?.['maxlength'])
+              {
+               <span class="text-danger">Category name must not exceed 100 characters.</span>
+              }
+              @if(categoryForm.get('name')?.errors?.['minlength'])
+              {
+               <span class="text-danger">Category name must be at least 3 characters.</span>
+              }
+          </div>
+           }
+  </div>
+
+  <button type="submit" class="btn btn-black no-hover rounded-5 px-4 w-100">
+     @if (isLoading) {
+        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+       }
+       @else
+       {
+               <span >Update</span>
+       }
+  </button>
+</form>
+
+
+</div>

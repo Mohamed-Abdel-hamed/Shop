@@ -1,0 +1,9 @@
+.remove-item i {
+  color: red;
+  transition: color 0.3s; /* smooth hover */
+}
+
+.remove-item:hover i {
+  color: white;
+}
+

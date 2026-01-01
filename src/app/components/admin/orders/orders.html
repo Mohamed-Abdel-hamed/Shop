@@ -1,0 +1,117 @@
+<div class="container">
+  <app-search-bar (searchChanged)="onSearchChanged($event)"></app-search-bar>
+<div class="row g-3">
+@for( order of orders; track order.id)
+{
+  <div class="col-12 col-md-6 col-lg-4">
+
+    <div class="card shadow-sm h-100 border-0">
+
+      <!-- HEADER -->
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <div>
+          <h6 class="mb-0">Order #{{ order.id }}</h6>
+          <small class="text-muted">
+            {{ order.orderDate | date:'short' }}
+          </small>
+        </div>
+
+        <span
+          class="badge"
+          [ngClass]="{
+            'bg-warning text-dark': order.status === 'Pending',
+            'bg-success': order.status === 'Completed',
+            'bg-danger': order.status === 'Cancelled'
+          }">
+          {{ order.status }}
+        </span>
+      </div>
+
+      <!-- BODY -->
+      <div class="card-body">
+
+        <!-- ORDER INFO -->
+        <div class="mb-2">
+          <div><strong>Customer:</strong> {{ order.customerId }}</div>
+
+          <div>
+            <strong>Payment:</strong>
+            <span
+              class="badge ms-1"
+              [ngClass]="{
+                'bg-warning text-dark': order.paymentStatus === 'Pending',
+                'bg-success': order.paymentStatus === 'Paid',
+                'bg-danger': order.paymentStatus === 'Failed'
+              }">
+              {{ order.paymentStatus }}
+            </span>
+          </div>
+
+          <div class="mt-1">
+            <strong>Total:</strong>
+            <span class="fw-bold text-primary">
+              {{ order.totalPrice | currency }}
+            </span>
+          </div>
+        </div>
+
+        <hr>
+
+        <!-- ORDER ITEMS -->
+        <div class="order-items">
+          @for(item of order.orderItems; track item.id)
+          {
+          <div
+            class="d-flex align-items-center mb-2">
+
+            <img
+              [src]="hostImage+item.productImageUrl"
+              class="img-thumbnail me-2"
+              width="45">
+
+            <div class="flex-grow-1">
+              <div class="fw-semibold">{{ item.productName }}</div>
+              <small class="text-muted">
+                {{ item.quantity }} × {{ item.unitPrice | currency }}
+              </small>
+            </div>
+
+            <div class="fw-bold">
+              {{ item.subTotal | currency }}
+            </div>
+          </div>
+        }
+
+        </div>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="card-footer d-flex justify-content-between bg-light">
+        <button class="btn btn-sm btn-outline-primary">
+          <i class="fa fa-eye"></i>
+          Details
+        </button>
+
+        <button class="btn btn-sm btn-outline-success">
+          <i class="fa fa-sync"></i>
+          Change Status
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+}
+
+
+</div>
+<!-- Pagination  -->
+<div class="mt-4">
+  <app-pagination
+    [pageNumber]="pageNumber"
+    [totalPages]="totalPages"
+    [hasPreviousPage]="pageNumber > 1"
+    [hasNextPage]="pageNumber < totalPages"
+    (pageChanged)="getOrders($event)">
+  </app-pagination>
+</div>

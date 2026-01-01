@@ -1,0 +1,221 @@
+<div class="container d-flex justify-content-center align-items-center">
+
+  <div [class.d-none]="!isFailedRegister" class="alert alert-warning" role="alert">
+   {{failedRegisterMessage}}
+</div>
+
+<div [class.d-none]="!isComplete" class="alert alert-success" role="alert">
+   success register we send confirm email - check it out!
+</div>
+  <form
+  [class.d-none]="isComplete||isFailedRegister"
+    [formGroup]="registerForm"
+    class="bg-light p-4 rounded-4 shadow form w-100"
+    (ngSubmit)="submit(registerForm)"
+  >
+    <!-- FIRST NAME -->
+    <div class="mb-3">
+      <label for="firstName" class="form-label">First name</label>
+      <input
+        type="text"
+        id="firstName"
+        formControlName="firstName"
+        class="form-control rounded-5"
+        [ngClass]="{
+          'border border-danger':
+            registerForm.get('firstName')?.invalid &&
+            registerForm.get('firstName')?.touched
+        }"
+      />
+
+      @if (registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched) {
+        <div class="d-flex flex-column">
+          @if (registerForm.get('firstName')?.errors?.['required']) {
+            <span class="text-danger">Please fill out this field.</span>
+          }
+          @if (registerForm.get('firstName')?.errors?.['maxlength']) {
+            <span class="text-danger">You can’t enter more than 50 characters.</span>
+          }
+          @if (registerForm.get('firstName')?.errors?.['minlength']) {
+            <span class="text-danger">Enter at least 3 characters.</span>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- LAST NAME -->
+    <div class="mb-3">
+      <label for="lastName" class="form-label">Last name</label>
+      <input
+        type="text"
+        id="lastName"
+        formControlName="lastName"
+        class="form-control rounded-5"
+        [ngClass]="{
+          'border border-danger':
+            registerForm.get('lastName')?.invalid &&
+            registerForm.get('lastName')?.touched
+        }"
+      />
+
+      @if (registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched) {
+        <div class="d-flex flex-column">
+          @if (registerForm.get('lastName')?.errors?.['required']) {
+            <span class="text-danger">Please fill out this field.</span>
+          }
+          @if (registerForm.get('lastName')?.errors?.['maxlength']) {
+            <span class="text-danger">You can’t enter more than 50 characters.</span>
+          }
+          @if (registerForm.get('lastName')?.errors?.['minlength']) {
+            <span class="text-danger">Enter at least 3 characters.</span>
+          }
+        </div>
+      }
+    </div>
+    <!-- USER NAME -->
+    <div class="mb-3">
+      <label for="userName" class="form-label">User name</label>
+      <input
+        type="text"
+        id="userName"
+        formControlName="userName"
+        class="form-control rounded-5"
+        [ngClass]="{
+          'border border-danger':
+            registerForm.get('userName')?.invalid &&
+            registerForm.get('userName')?.touched
+        }"
+      />
+
+      @if (registerForm.get('userName')?.invalid && registerForm.get('userName')?.touched) {
+        <div class="d-flex flex-column">
+          @if (registerForm.get('userName')?.errors?.['required']) {
+            <span class="text-danger">Please fill out this field.</span>
+          }
+          @if (registerForm.get('userName')?.errors?.['maxlength']) {
+            <span class="text-danger">You can’t enter more than 50 characters.</span>
+          }
+          @if (registerForm.get('userName')?.errors?.['minlength']) {
+            <span class="text-danger">Enter at least 3 characters.</span>
+          }
+        </div>
+      }
+    </div>
+    <!-- EMAIL -->
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input
+        type="email"
+        id="email"
+        formControlName="email"
+        class="form-control rounded-5"
+        [ngClass]="{
+          'border border-danger':
+            (registerForm.get('email')?.invalid &&
+            registerForm.get('email')?.touched)||
+            errorMessage.length>0
+        }"
+        #emailInput
+      />
+
+      @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
+        <div class="d-flex flex-column">
+          @if (registerForm.get('email')?.errors?.['required']) {
+            <span class="text-danger">Email is required.</span>
+          }
+          @if (registerForm.get('email')?.errors?.['email']) {
+            <span class="text-danger">Please enter a valid email address.</span>
+          }
+
+        </div>
+      }
+
+       @if (errorMessage.length>0) {
+            <span class="text-danger">{{errorMessage}}</span>
+          }
+    </div>
+  <!-- Phone-->
+    <div class="mb-3">
+      <label for="phone" class="form-label">Phone</label>
+      <input
+        type="text"
+        id="phone"
+        formControlName="phoneNumber"
+        class="form-control rounded-5"
+        [ngClass]="{
+          'border border-danger':
+            registerForm.get('phoneNumber')?.invalid &&
+            registerForm.get('phoneNumber')?.touched
+        }"
+      />
+
+      @if (registerForm.get('phoneNumber')?.invalid && registerForm.get('phoneNumber')?.touched) {
+        <div class="d-flex flex-column">
+          @if (registerForm.get('phoneNumber')?.errors?.['required']) {
+            <span class="text-danger">Email is required.</span>
+          }
+           @if (registerForm.get('phoneNumber')?.errors?.['pattern']) {
+           <span class="text-danger">
+             Phone number must be 11 digits and start with 01.
+            </span>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- PASSWORD -->
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input
+        type="text"
+        id="password"
+        formControlName="password"
+        class="form-control rounded-5"
+        [ngClass]="{
+          'border border-danger':
+            registerForm.get('password')?.invalid &&
+            registerForm.get('password')?.touched
+        }"
+      />
+
+      @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {
+        <div class="d-flex flex-column">
+          @if (registerForm.get('password')?.errors?.['required']) {
+            <span class="text-danger">Password is required.</span>
+          }
+          @if (registerForm.get('password')?.errors?.['pattern']) {
+            <span class="text-danger"> Password must be at least 9 characters long and include uppercase, lowercase, number,
+            and one special character (@, #, !, *, %, /, +, -).</span>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- TERMS
+    <div class="form-check mb-3">
+      <input
+        class="form-check-input rounded-5"
+        type="checkbox"
+        id="terms"
+        formControlName="terms"
+      />
+      <label class="form-check-label" for="terms">
+        Agree to terms and conditions
+      </label>
+
+      @if (registerForm.get('terms')?.invalid && registerForm.get('terms')?.touched) {
+        <div class="text-danger">You must agree before submitting.</div>
+      }
+    </div>
+ -->
+    <!-- SUBMIT -->
+    <div class="text-center">
+      <button class="btn btn-black no-hover rounded-5 px-4 w-100" type="submit">
+       <span [class.d-none]="isLoading">Create</span>
+       <div [class.d-none]="!isLoading">
+          <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+       </div>
+      </button>
+    </div>
+  </form>
+</div>

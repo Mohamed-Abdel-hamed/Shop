@@ -1,0 +1,38 @@
+ <div [class.show]="isOpen" class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header d-flex justify-content-between ">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">FastShop</h5>
+        <div class="close">
+<i (click)="closeSideBar()" data-bs-dismiss="offcanvas" aria-label="Close" class="fa-regular fa-circle-xmark pointer" style="color: #000000;"></i>
+        </div>
+
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end  pe-3">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page"routerLink="/home" routerLinkActive="active" >Home</a>
+          </li>
+          @if(isLogin)
+          {
+                      <li class="nav-item">
+            <a class="nav-link" aria-current="page"routerLink="/login" routerLinkActive="active" >LogIn</a>
+          </li>
+          }
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page"routerLink="/register" routerLinkActive="active" >Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page"routerLink="/profile/me" routerLinkActive="active" >profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link logout" aria-current="page" (click)="logOut()" >LogOut</a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link" routerLink="/onsale" routerLinkActive="active">OnSale</a>
+          </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/new-arrivales">New Arrivales</a>
+      </li>
+
+        </ul>
+      </div>
+    </div>

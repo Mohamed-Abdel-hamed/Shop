@@ -1,0 +1,86 @@
+<div class="container">
+
+<div class=" d-flex justify-content-center align-items-center mt-5">
+
+  <form
+    [formGroup]="loginForm"
+    class="bg-light p-4 rounded-4 shadow form w-100"
+    (ngSubmit)="login(loginForm)"
+  >
+  @if(errorMessage.length>0)
+  {
+      <div class="alert alert-warning" role="alert">
+        {{errorMessage}}
+</div>
+  }
+
+    <!-- EMAIL -->
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input
+        type="email"
+        id="email"
+        formControlName="email"
+        class="form-control rounded-5"
+        [ngClass]="{
+          'border border-danger':
+            (loginForm.get('email')?.invalid &&
+            loginForm.get('email')?.touched)||
+            errorMessage.length>0
+        }"
+      />
+
+      @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
+        <div class="d-flex flex-column">
+          @if (loginForm.get('email')?.errors?.['required']) {
+            <span class="text-danger">Email is required.</span>
+          }
+          @if (loginForm.get('email')?.errors?.['email']) {
+            <span class="text-danger">Please enter a valid email address.</span>
+          }
+
+        </div>
+      }
+    </div>
+    <!-- PASSWORD -->
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input
+        type="text"
+        id="password"
+        formControlName="password"
+        class="form-control rounded-5"
+        [ngClass]="{
+          'border border-danger':
+            loginForm.get('password')?.invalid &&
+            loginForm.get('password')?.touched
+        }"
+      />
+
+      @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+        <div>
+          @if (loginForm.get('password')?.errors?.['required']) {
+            <span class="text-danger">Password is required.</span>
+          }
+        </div>
+      }
+    </div>
+    <a routerLink="/auth/forgetPassword">Forget Password</a>
+
+    <!-- SUBMIT -->
+    <div class="text-center">
+      <button [disabled]="isLocked" class="btn btn-black no-hover rounded-5 px-4 w-100" type="submit">
+
+       @if (isLoading) {
+        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+       }
+       @else
+       {
+               <span >login</span>
+       }
+      </button>
+    </div>
+  </form>
+</div>
+
+</div>

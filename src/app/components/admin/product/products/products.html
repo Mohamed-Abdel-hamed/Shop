@@ -1,0 +1,149 @@
+
+<div>
+  <div class="d-flex justify-content-between align-items-center mb-2 bg-body-secondary p-2 rounded-2">
+  <a routerLink="/admin/add-product"  class="btn btn-black  no-hover rounded-5 px-4 d-flex justify-content-between align-items-center ">Add <i class="fa-solid fa-plus" style="color: #ffffff;"></i></a>
+          <app-search-bar (searchChanged)="search($event)"></app-search-bar>
+  </div>
+  @if(errorMessage)
+  {
+    <div class="alert alert-danger d-flex justify-content-between align-items-center">
+      {{errorMessage}}
+ <a (click)="ngOnInit()"  class="btn btn-black  no-hover rounded-5 px-4">Products</a>
+    </div>
+  }
+  @if(!errorMessage)
+  {
+  <div class="card  rounded-4 shadow">
+<div class="card-body">
+<div class="table-responsive">
+<table class="table">
+  <thead>
+    <tr >
+     <th scope="col">
+ <div  class="d-flex">
+             Id
+          <span (click)="sort('id')">
+ @if(isArrowChange&&sortField==='id')
+            {
+               <i class="fa-solid fa-up-long fa-2xs"></i>
+            }
+            @else {
+               <i class="fa-solid fa-down-long fa-2xs"></i>
+            }
+  </span>
+        </div>
+</th>
+
+      <th scope="col">Image</th>
+      <th scope="col">
+        <div  class="d-flex">
+                      Name
+          <span (click)="sort('name')" >
+            @if(isArrowChange&&sortField==='name')
+            {
+               <i class="fa-solid fa-up-long fa-2xs"></i>
+            }
+            @else {
+               <i class="fa-solid fa-down-long fa-2xs"></i>
+            }
+  </span>
+        </div>
+      </th>
+      <th scope="col">
+           <div  class="d-flex">
+                      Price
+          <span (click)="sort('price')">
+ @if(isArrowChange&&sortField==='price')
+            {
+               <i class="fa-solid fa-up-long fa-2xs"></i>
+            }
+            @else {
+               <i class="fa-solid fa-down-long fa-2xs"></i>
+            }
+  </span>
+        </div>
+      </th>
+      <th scope="col">
+          <div  class="d-flex">
+                      Stock
+          <span (click)="sort('stock')">
+ @if(isArrowChange&&sortField==='stock')
+            {
+               <i class="fa-solid fa-up-long fa-2xs"></i>
+            }
+            @else {
+               <i class="fa-solid fa-down-long fa-2xs"></i>
+            }
+  </span>
+        </div>
+      </th>
+      <th scope="col">
+        <div  class="d-flex">
+               Created On
+          <span (click)="sort('createdOn')">
+ @if(isArrowChange&&sortField==='createdOn')
+            {
+               <i class="fa-solid fa-up-long fa-2xs"></i>
+            }
+            @else {
+               <i class="fa-solid fa-down-long fa-2xs"></i>
+            }
+  </span>
+        </div>
+      </th>
+      <th scope="col">
+                Updated On
+      </th>
+      <th scope="col">Categories</th>
+      <th scope="col">IsDelete</th>
+       <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for(product of products| paginate: { itemsPerPage: 5, currentPage: p };track product.id)
+    {
+    <tr>
+      <th scope="row" >{{product.id}}</th>
+      <td>
+         <img src="{{hostImage}}{{product.imageUrl}}" width="100" class="img-thumbnail" alt="{{product.name}}">
+      </td>
+      <td>{{product.name}}</td>
+      <td>{{product.price}}</td>
+      <td>{{product.stock}}</td>
+      <td>{{product.createdOn}}</td>
+      <td>{{product.updatedOn}}</td>
+      <td>
+        @for (category of product.categories; track category) {
+        <span class="badge rounded-pill text-bg-light">{{category}}</span>
+        }
+      </td>
+      <td><span [ngClass]="product.isDelete? 'text-bg-danger':'text-bg-success'" class="badge">
+       {{ product.isDelete ? 'Not Available' : 'Available' }}
+      </span></td>
+       <td class="p-1">
+      <a  (click)="open(product.id)"><i class="fa-solid fa-rotate"></i></a>
+      ||
+      <a  [routerLink]="['/admin/edit', product.id]"><i class="fa-regular fa-pen-to-square" style="color: #ffbf00;"></i></a>
+    </td>
+    </tr>
+    }
+  </tbody>
+</table>
+<pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
+</div>
+</div>
+  }
+<app-modal  title="Are you sure?"
+  text="This item will be change status to product"
+  icon="warning"
+  [showCancelButton]="true"
+  confirmButtonText="Change"
+  cancelButtonText="Cancel"
+  confirmButtonColor="#d33"
+  cancelButtonColor="black"
+   [itemId]="selectedItemId"
+  (Confirmed)="toggleStatus($event)"
+ >
+
+</app-modal>

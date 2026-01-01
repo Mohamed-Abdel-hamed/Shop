@@ -1,0 +1,49 @@
+@if(product!=null)
+{
+<div class="container my-5" >
+  <div class="row g-4 align-items-start">
+
+    <!-- Product Image -->
+    <div class="col-12 col-md-6 text-center">
+      <img
+        [src]="hostImage + product.imageUrl"
+        class="img-fluid rounded-4 shadow-sm product-image"
+        alt="{{ product.name }}"
+      />
+    </div>
+
+    <!-- Product Info -->
+    <div class="col-12 col-md-6">
+      <h2 class="fw-bold mb-2">{{ product.name }}</h2>
+
+      <p class="text-muted text-break w-100 mb-3">
+        {{ product.description }}
+      </p>
+
+      <!-- Categories -->
+      <div class="mb-3">
+        @for (category of product.categories; track category) {
+          <span class="badge text-bg-light me-2 mb-2">
+            {{ category }}
+          </span>
+        }
+      </div>
+
+      <!-- Price -->
+      <div class="mb-3">
+        <span class="fs-3 fw-bold text-success">
+          {{ product.price | currency:'$' }}
+        </span>
+      </div>
+
+      <!-- Actions -->
+      <div class="d-flex gap-3">
+                 <app-add-to-cart-button [productId]="product.id"
+          ></app-add-to-cart-button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+}

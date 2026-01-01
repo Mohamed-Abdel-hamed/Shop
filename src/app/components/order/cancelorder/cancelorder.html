@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="d-flex align-items-center mt-5">
+    @if(successMesssage.length>0)
+{
+<div class="alert alert-warning" role="alert">
+  order success !
+</div>
+}
+@if(errorMesssage.length>0)
+{
+<div class="alert alert-danger" role="alert">
+ {{errorMesssage}}
+</div>
+}
+
+  </div>
+</div>

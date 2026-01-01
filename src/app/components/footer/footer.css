@@ -1,0 +1,21 @@
+.media-icon{
+  padding-left: 2px;
+  padding-right: 2px;
+}
+.paragraph-footer {
+  font-size: clamp(14px, 2vw, 20px); /* أصغر حجم، مرن حسب الشاشة، أكبر حجم */
+  line-height: 1.4;
+}
+.head-list-footer
+{
+  font-size: 16px;
+font-weight: 600;
+}
+.item-list-footer{
+    font-size: 13px;
+font-weight: 500;
+color: rgb(156, 154, 154);
+}
+.bg-light-gray{
+background-color: #f1f1f1;
+}

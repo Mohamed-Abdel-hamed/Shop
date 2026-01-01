@@ -1,0 +1,7 @@
+
+    <button
+            class="btn btn-dark rounded-5 mt-auto"
+            [disabled]="isOutOfStock"
+            (click)="addToCart()">
+            {{ isOutOfStock ? 'Out of Stock' : 'Add to Cart' }}
+    </button>

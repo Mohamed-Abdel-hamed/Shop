@@ -1,0 +1,57 @@
+<nav class="navbar container">
+  <div class="container-fluid d-flex align-items-center justify-content-between ">
+
+      <i  data-bs-target="#offcanvasNavbar pointer"
+      aria-controls="offcanvasNavbar"
+      (click)="openSideBar()"[class.d-none]="!isMobile"
+       class=" fa-solid fa-bars fa-sm m-1"
+        style="color: #000000;"></i>
+
+    <a class="navbar-brand fw-bold"  routerLink="/home">Fast Shop</a>
+    <app-sidbar (close)="isOpenSideBar=false" [isOpen]="isOpenSideBar"></app-sidbar>
+
+       <ul [class.d-none]="isMobile" class="navbar-nav d-flex flex-row gap-3 mb-0">
+        @if(isLogin)
+        {
+
+                <li class="nav-item">
+        <a class="nav-link text-dark" routerLink="/onsale">On Sale</a>
+      </li>
+        }
+      <li class="nav-item">
+        <a class="nav-link text-dark" routerLink="/new-arrivales">New Arrivales</a>
+      </li>
+    </ul>
+      <form class="d-flex  search-wrapper mx-lg-5 mx-md-5 mx-sm-4 mx-xl-3" role="search"  [ngClass]="{'d-none':isXSmale,'w-15': isMobile, 'w-65': !isMedium, 'w-40': isMedium}" >
+        <input class="form-control search-input-navbar" type="search" placeholder="Search" aria-label="Search"/>
+        <button class="search btn" type="submit"><i class="fa-solid fa-magnifying-glass" style="color:  rgb(25, 24, 24);"></i></button>
+      </form>
+      <ul class="navbar-nav d-flex flex-row gap-3 mb-0">
+      @if(isLogin)
+      {
+              <li class="nav-item mt-2">
+         <a routerLink="/cart"><i class="fa-solid fa-cart-shopping" style="color: #000000;"></i></a>
+      </li>
+              <li (click)="$event.stopPropagation()" class="nav-item  mt-2 dropdown dropdown-profile">
+          <div  (click)="toggleDropDownProfile()" class="dropdown-toggle no-arrow"  [class.show]="isDropDownProfile">
+            <i class="fa-solid fa-circle-user" style="color: #000000;"></i>
+          </div>
+           <ul class="dropdown-menu position-absolute start-50 translate-middle-x mt-2"[class.show]="isDropDownProfile">
+          <li><a class="dropdown-item" routerLink="/profile/me">Profile</a></li>
+          <li><a class="dropdown-item logout" (click)="logOut()">Log out</a></li>
+        </ul>
+      </li>
+      }
+      @if(!isLogin)
+      {
+              <li class="nav-item">
+           <a routerLink="/login" class="nav-link">Login</a>
+      </li>
+      <li class="nav-item">
+          <a routerLink="/register" class="btn btn-black rounded-5 no-hover">Register</a>
+           </li>
+      }
+      </ul>
+  </div>
+</nav>
+

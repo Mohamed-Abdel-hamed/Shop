@@ -1,0 +1,14 @@
+.nav-link:hover{
+background-color: #0d6efd;
+color: white !important
+}
+.seperate{
+  border-bottom: 2px solid #000000;
+  margin-bottom: 10px;
+  width: 50px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.active{
+color: white !important
+}

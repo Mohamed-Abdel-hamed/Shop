@@ -1,0 +1,6 @@
+.table td, .table th {
+  vertical-align: middle !important;
+}
+ .table th span,.fa-rotate{
+  cursor: pointer;
+}

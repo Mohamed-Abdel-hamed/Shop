@@ -1,0 +1,37 @@
+
+@if(totalPages > 1)
+{
+<nav>
+  <ul class="pagination justify-content-center">
+
+    <!-- Previous -->
+    <li class="page-item" [class.disabled]="!hasPreviousPage">
+      <button class="page-link"
+              (click)="changePage(pageNumber - 1)">
+        Previous
+      </button>
+    </li>
+
+    <!-- Pages -->
+     @for (page of pages; track $index) {
+      <li class="page-item"
+          [class.active]="page === pageNumber">
+        <button class="page-link"
+                (click)="changePage(page)">
+          {{ page }}
+        </button>
+      </li>
+    }
+
+    <!-- Next -->
+    <li class="page-item" [class.disabled]="!hasNextPage">
+      <button class="page-link"
+              (click)="changePage(pageNumber + 1)">
+        Next
+      </button>
+    </li>
+
+  </ul>
+</nav>
+}
+

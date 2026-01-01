@@ -1,0 +1,140 @@
+
+<div class="d-flex justify-content-center align-items-center">
+  @if(errorMessage)
+  {
+    <div class="alert alert-danger">
+      {{errorMessage}}
+    </div>
+  }
+ @if(!errorMessage){
+    <form
+  [formGroup]="formProduct"
+  (ngSubmit)="submit(formProduct)"
+  class="bg-light p-4 rounded-4 shadow form w-100">
+
+  <div>
+    <label for="name" class="form-label">Name</label>
+    <input id="name" type="text" class="form-control"
+           formControlName="name">
+           @if(formProduct.get('name')?.invalid&&formProduct.get('name')?.touched)
+           {
+            <div class="d-flex flex-column">
+              @if(formProduct.get('name')?.errors?.['required'])
+              {
+                  <span class="text-danger">Product name is required.</span>
+              }
+              @if(formProduct.get('name')?.errors?.['maxlength'])
+              {
+               <span class="text-danger">Product name must not exceed 100 characters.</span>
+              }
+          </div>
+           }
+  </div>
+
+  <div>
+    <label for="description" class="form-label">Description</label>
+    <textarea id="description" class="form-control"
+              formControlName="description"></textarea>
+               @if(formProduct.get('description')?.invalid&&formProduct.get('description')?.touched)
+               {
+                              <div class="d-flex flex-column">
+                                 @if(formProduct.get('description')?.errors?.['required'])
+              {
+                               <span class="text-danger">Product description is required.</span>
+              }
+              @if(formProduct.get('description')?.errors?.['maxlength'])
+              {
+                        <span class="text-danger">Product description must not exceed 500 characters.</span>
+              }
+          </div>
+               }
+  </div>
+
+  <div>
+    <label for="price" class="form-label">Price</label>
+    <input id="price" type="number" class="form-control"
+           formControlName="price">
+            @if(formProduct.get('price')?.invalid&&formProduct.get('price')?.touched)
+            {
+                         <div class="d-flex flex-column">
+                           @if(formProduct.get('price')?.errors?.['required'])
+              {
+                            <span class="text-danger">Product price is required.</span>
+              }
+              @if(formProduct.get('price')?.errors?.['min'])
+              {
+                            <span class="text-danger">Product price must be greater than 0.</span>
+              }
+          </div>
+            }
+  </div>
+
+  <div>
+    <label for="stock" class="form-label">Stock</label>
+    <input id="stock" type="number" class="form-control"
+           formControlName="stock">
+           @if(formProduct.get('stock')?.invalid&&formProduct.get('stock')?.touched)
+           {
+           <div class="d-flex flex-column">
+             @if(formProduct.get('stock')?.errors?.['required'])
+              {
+                  <span class="text-danger">Product stock is required.</span>
+              }
+              @if(formProduct.get('stock')?.errors?.['min'])
+              {
+                  <span class="text-danger">Product stock must be zero or a positive number.</span>
+              }
+          </div>
+           }
+  </div>
+<div>
+
+  <ng-multiselect-dropdown
+     [data]="dropdownList"
+     [settings]="dropdownSettings"
+     formControlName="categories">
+  </ng-multiselect-dropdown>
+   @if(formProduct.get('categories')?.invalid&&formProduct.get('categories')?.touched)
+   {
+     @if(formProduct.get('categories')?.errors?.['required'])
+              {
+                <span class="text-danger">Categories is required.</span>
+              }
+   }
+</div>
+  <div>
+    <label for="image" class="form-label">Image</label>
+    <input id="image" type="file" class="form-control"
+          (change)="uploadImage($event)" >
+             @if(formProduct.get('image')?.invalid&&formProduct.get('image')?.touched)
+           {
+            <div class="d-flex flex-column">
+              @if(formProduct.get('image')?.errors?.['invalidType'])
+              {
+                 <span class="text-danger">Only JPG, JPEG, or PNG images are allowed.</span>
+              }
+              @if(formProduct.get('image')?.errors?.['maxSize'])
+              {
+              <span class="text-danger">Image must not exceed 2MB.</span>
+              }
+          </div>
+           }
+  </div>
+
+  <img [src]="imagePreview" class="img-thumbnail mt-2"
+       style="max-width: 160px;">
+
+  <button type="submit" class="btn btn-black no-hover rounded-5 px-4 w-100">
+     @if (isLoading) {
+        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+       }
+       @else
+       {
+               <span >Add</span>
+       }
+  </button>
+</form>
+
+  }
+
+</div>

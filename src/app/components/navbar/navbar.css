@@ -1,0 +1,24 @@
+.navbar > .container-fluid {
+  flex-wrap: nowrap !important;
+}
+.w-15{
+  width: 15%;
+}
+.w-65{
+  width: 65%;
+}
+.w-40{
+  width: 40%;
+}
+.nav-link {
+  white-space: nowrap;
+}
+.no-arrow::after {
+  display: none !important;
+}
+.logout{
+  cursor: pointer;
+}
+.pointer{
+  cursor:pointer;
+}
